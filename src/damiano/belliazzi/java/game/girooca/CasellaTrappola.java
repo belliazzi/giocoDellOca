@@ -52,7 +52,7 @@ public class CasellaTrappola implements Casella {
 	public void welcomeGiocatore(Giocatore giocatore) {
 		if (this.getGiocatoreCorrente() != null) {
 			
-			System.out.print("The giocatore " +this.getGiocatoreCorrente().toString() + " is already here !");
+			System.out.print("il giocatore " +this.getGiocatoreCorrente().getNome() + " si trova sulla casella  !");
 			
 			Giocatore giocatoreCheDeveSbaraccare = this.getGiocatoreCorrente();
 			
