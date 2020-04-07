@@ -4,6 +4,7 @@ public class Giocatore {
 	String nome;
 	Casella casellaCorrente;
 	Casella casellaPrecedente;
+	boolean automa;
 
 	public String getNome() {
 		return nome;
@@ -34,7 +35,7 @@ public class Giocatore {
 		return ((int) (Math.random() * 10000) % 6) + 1;
 	}
 
-	public int LancioDueDadi() {
+	public int lancioDueDadi() {
 		int result = lancioUnDado() + lancioUnDado();
 		return result;
 	}
@@ -43,6 +44,14 @@ public class Giocatore {
 		super();
 		this.nome = nome;
 		this.casellaCorrente=new CasellaInizioStart(0);
+	}
+
+	public boolean isAutoma() {
+		return automa;
+	}
+
+	public void setAutoma(boolean automa) {
+		this.automa = automa;
 	}
 	
 

@@ -1,5 +1,7 @@
 package damiano.belliazzi.java.game.girooca;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ private List<Giocatore> giocatori = new ArrayList<Giocatore>();
 	private PlanciaBase planciaBase;
 	
 	private boolean fineGioco;
+	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public List<Giocatore> getGiocatori() {
 		return giocatori;
@@ -60,8 +63,18 @@ private List<Giocatore> giocatori = new ArrayList<Giocatore>();
 			
 			
 			if (p.getCasellaCorrente().isliberabile()) {
-				
-				int result = p.LancioDueDadi();
+				int result=0;
+				if (p.isAutoma())  {
+					result=p.lancioDueDadi();
+				} else 
+				{
+					
+					int i=1;
+					result=lancioManuale( i);
+					i=2;
+					result=result+lancioManuale(i);
+					
+				}
 				
 			
 				int currentIndex = p.getCasellaCorrente().getNumero();
@@ -91,7 +104,7 @@ private List<Giocatore> giocatori = new ArrayList<Giocatore>();
 			
 				if (destinationIndex == boardSize) {
 					System.out.println(p.getNome() + " e' nella casella " +destinationIndex
-							+" e la casella finale e lui vince VINCE"+p.getNome().toUpperCase()+"******");
+							+" e la casella finale e lui vince VINCE " +p.getNome().toUpperCase()+ "*******");
 					this.setFineGioco(true);
 					break turno;
 				}
@@ -102,9 +115,19 @@ private List<Giocatore> giocatori = new ArrayList<Giocatore>();
 		}
 		
 	}
+
+	private int lancioManuale( int i) {
+		int numeroDado=0;
+		while  (!(numeroDado>0 && numeroDado<=6)) {
+			
+			System.out.println("Inserire il numero del dado "+ i +" (valore numerico) da 1 a 6 :");
+			numeroDado = Utility.getNumeroDaConsole(bufferedReader);
+		}
+		return numeroDado;
+	}
 	
 	/**
-	 * La partita è composta da pi turni 
+	 * La partita e' composta da piu' turni 
 	 * @param Nmax
 	 */
 	public void giocaPiuTurni(int Nmax) {
